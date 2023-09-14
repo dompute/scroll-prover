@@ -16,6 +16,7 @@ use prover::{
 };
 use types::eth::BlockTrace;
 use zkevm_circuits::util::SubCircuit;
+use std::env;
 
 #[test]
 fn test_short_git_version() {
@@ -151,6 +152,7 @@ fn test_mock_prove_padding() {
 #[test]
 fn test_mock_prove() {
     init_env_and_log("integration");
+    env::set_var("TRACE_PATH", "./tests/extra_traces/new_calculation.json");
     let block_traces = load_block_traces_for_test().1;
     Prover::<SuperCircuit>::mock_prove_target_circuit_batch(&block_traces).unwrap();
 }
